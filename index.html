@@ -9,388 +9,364 @@
   <link rel="icon" href="icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Barlow+Condensed:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --verd:   #3d7a52;
-      --verd2:  #5a9e6f;
-      --verd3:  #82c496;
-      --fosc:   #0b1610;
-      --fosc2:  #111e16;
-      --fosc3:  #1a2e20;
-      --blanc:  #f0ede8;
-      --gris:   #a8b5a0;
-      --gris2:  #6a7a62;
+      --rosa:       #c4556a;
+      --rosa-clar:  #f8e8eb;
+      --oliva:      #7a8040;
+      --oliva-clar: #eaecda;
+      --cel:        #4a7a8a;
+      --cel-clar:   #d8eaee;
+      --sorra:      #b86840;
+      --sorra-clar: #f5e4d8;
+      --fosc:       #1c1a18;
+      --gris:       #f0ede8;
+      --blanc:      #faf8f5;
+      --text:       #2e2c2a;
+      --text2:      #6a6560;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--fosc);
-      color: var(--blanc);
-      font-family: 'Montserrat', sans-serif;
+      background: var(--blanc);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
       min-height: 100vh;
     }
 
     /* ── HEADER ── */
     header {
-      background: #060e09;
-      padding: .9rem 1.5rem;
+      background: var(--rosa);
+      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    .logo-img {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: .12em;
-      color: var(--blanc);
+    .logo {
+      font-family: 'Caveat', cursive;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: white;
       text-decoration: none;
-      text-transform: uppercase;
+      line-height: 1;
     }
-    .logo-img span { color: var(--verd3); }
     nav.tabs {
       display: flex;
-      gap: .3rem;
+      gap: .5rem;
+      flex-wrap: wrap;
     }
     nav.tabs a {
-      font-size: .7rem;
-      font-weight: 600;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--gris);
+      color: rgba(255,255,255,.75);
       text-decoration: none;
-      padding: .45rem 1rem;
-      border: 1px solid transparent;
-      border-radius: 3px;
+      padding: .4rem .9rem;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 2px;
       transition: all .2s;
     }
-    nav.tabs a.actiu, nav.tabs a:hover {
-      color: var(--blanc);
-      border-color: rgba(255,255,255,.2);
-      background: rgba(255,255,255,.06);
+    nav.tabs a:hover, nav.tabs a.actiu {
+      background: rgba(255,255,255,.2);
+      color: white;
     }
 
     /* ── HERO ── */
     .hero {
+      background: var(--fosc);
+      color: white;
+      padding: 4rem 2rem 3.5rem;
       position: relative;
-      height: 62vh;
-      min-height: 340px;
-      background:
-        linear-gradient(160deg, #0b2015 0%, #163325 40%, #0e2a1c 70%, #07100c 100%);
-      display: flex;
-      align-items: flex-end;
-      padding: 0 5vw 3.5rem;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(61,122,82,.18) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(61,122,82,.10) 0%, transparent 60%);
-    }
-    /* Decoració tipogràfica de fons */
     .hero::after {
-      content: '«';
+      content: '"';
       position: absolute;
-      right: 4vw;
+      right: -1rem;
       top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(18rem, 35vw, 40rem);
+      transform: translateY(-55%);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(14rem, 30vw, 26rem);
       line-height: 1;
-      color: rgba(61,122,82,.07);
+      color: rgba(196,85,106,.18);
       pointer-events: none;
       user-select: none;
     }
-    .hero-contingut {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-eyebrow {
+    .hero-inner { position: relative; z-index: 1; max-width: 900px; }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
       font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .22em;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      color: var(--verd3);
-      margin-bottom: .8rem;
+      background: var(--rosa);
+      color: white;
+      padding: .3rem .8rem;
+      margin-bottom: 1.2rem;
     }
     .hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.4rem, 7vw, 5.5rem);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: #fff;
-      line-height: 1.05;
-      margin-bottom: .6rem;
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 1;
+      color: white;
+      margin-bottom: .5rem;
     }
     .hero-sub {
-      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(.95rem, 2vw, 1.2rem);
-      color: var(--gris);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.6);
     }
 
     /* ── BIO ── */
     .bio {
-      background: var(--fosc2);
-      padding: 2.5rem 5vw;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: white;
+      border-bottom: 3px solid var(--rosa);
+      padding: 2rem 2rem;
     }
     .bio p {
-      font-size: .93rem;
-      line-height: 1.8;
-      color: var(--gris);
-      max-width: 740px;
+      font-size: .95rem;
+      line-height: 1.85;
+      color: var(--text2);
+      max-width: 720px;
     }
-    .bio p + p { margin-top: .8rem; }
 
     /* ── SECCIÓ POEMES ── */
-    .seccio-poemes {
-      padding: 3rem 5vw 5rem;
-    }
+    .seccio-poemes { padding: 2.5rem 2rem 4rem; }
+
     .seccio-cap {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
       flex-wrap: wrap;
-    }
-    .seccio-titol-wrap {
-      flex: 1;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--fosc);
     }
     .seccio-titol {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--fosc);
+    }
+    .filtres { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .btn-filtre {
+      font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
       font-size: .78rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--blanc);
-      margin-bottom: .6rem;
-    }
-    .linea {
-      height: 2px;
-      background: linear-gradient(90deg, var(--verd) 0%, transparent 100%);
-      max-width: 260px;
-    }
-
-    /* Filtres */
-    .filtres {
-      display: flex;
-      gap: .4rem;
-      flex-wrap: wrap;
-    }
-    .btn-filtre {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.15);
-      color: var(--gris);
-      font-family: 'Montserrat', sans-serif;
-      font-size: .7rem;
-      font-weight: 600;
       letter-spacing: .1em;
       text-transform: uppercase;
-      padding: .35rem .9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      color: var(--text2);
+      padding: .3rem .85rem;
       border-radius: 2px;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .18s;
     }
-    .btn-filtre:hover, .btn-filtre.actiu {
-      background: var(--verd);
-      border-color: var(--verd);
-      color: #fff;
+    .btn-filtre.actiu, .btn-filtre:hover {
+      border-color: var(--fosc);
+      background: var(--fosc);
+      color: white;
     }
 
-    /* ── GRID DE TARGETES ── */
+    /* ── GRID ── */
     .grid-poemes {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 0;
     }
 
-    /* ── TARGETA POEMA ── */
+    /* ── TARGETA ── */
+    /* Cada targeta rep un color de fons de la paleta */
     .targeta {
-      background: var(--fosc2);
-      border: 1px solid rgba(255,255,255,.07);
-      border-top: 3px solid var(--verd);
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: transform .25s, box-shadow .25s;
+      transition: opacity .2s;
+      border: 1px solid rgba(0,0,0,.08);
     }
-    .targeta:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.5);
-    }
+    .targeta:hover { opacity: .88; }
 
-    /* Cometa gran */
+    .targeta.color-0 { background: var(--rosa-clar); }
+    .targeta.color-1 { background: var(--oliva-clar); }
+    .targeta.color-2 { background: var(--cel-clar); }
+    .targeta.color-3 { background: var(--sorra-clar); }
+
     .cometa {
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      line-height: .7;
-      color: rgba(61,122,82,.35);
-      padding: 1.2rem 1.4rem .2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 5.5rem;
+      line-height: .8;
+      padding: 1rem 1.4rem .2rem;
       user-select: none;
     }
+    .targeta.color-0 .cometa { color: rgba(196,85,106,.3); }
+    .targeta.color-1 .cometa { color: rgba(122,128,64,.3); }
+    .targeta.color-2 .cometa { color: rgba(74,122,138,.3); }
+    .targeta.color-3 .cometa { color: rgba(184,104,64,.3); }
 
-    /* Cos de la targeta */
     .targeta-cos {
       flex: 1;
-      padding: .5rem 1.6rem 1.2rem;
+      padding: .3rem 1.6rem 1.4rem;
     }
     .extracte {
-      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--blanc);
+      font-size: .97rem;
+      line-height: 1.8;
+      color: var(--fosc);
+      white-space: pre-line;
     }
 
-    /* Peu de la targeta */
     .targeta-peu {
       padding: 1rem 1.6rem 1.2rem;
-    }
-    .linea-peu {
-      height: 1px;
-      background: rgba(255,255,255,.12);
-      margin-bottom: .8rem;
-    }
-    .peu-info {
+      border-top: 1.5px solid rgba(0,0,0,.1);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-end;
       gap: .5rem;
       flex-wrap: wrap;
     }
-    .peu-autor {
-      font-size: .78rem;
-      font-weight: 600;
+    .peu-titol {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
       letter-spacing: .06em;
-      color: var(--blanc);
-    }
-    .peu-autor span {
-      display: block;
-      font-weight: 400;
-      color: var(--gris2);
-      font-size: .72rem;
-      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--fosc);
     }
     .peu-data {
-      font-size: .7rem;
-      color: var(--gris2);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .75rem;
+      color: var(--text2);
+      letter-spacing: .06em;
     }
     .badge {
-      font-size: .62rem;
+      font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      letter-spacing: .1em;
+      font-size: .68rem;
+      letter-spacing: .12em;
       text-transform: uppercase;
       padding: .18rem .55rem;
       border-radius: 2px;
     }
-    .badge-ambdos { background: rgba(61,122,82,.25); color: var(--verd3); }
-    .badge-poema  { background: rgba(255,255,255,.08); color: var(--gris); }
-    .badge-canco  { background: rgba(61,122,82,.15); color: var(--verd3); }
+    .badge-ambdos { background: var(--rosa); color: white; }
+    .badge-poema  { background: var(--fosc); color: white; }
+    .badge-canco  { background: var(--oliva); color: white; }
 
-    /* ── MODAL POEMA COMPLET ── */
+    /* ── BUIT ── */
+    .buit {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 1rem;
+      font-style: italic;
+      color: var(--text2);
+    }
+
+    /* ── MODAL ── */
     .modal-fons {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.85);
+      background: rgba(28,26,24,.82);
       z-index: 200;
       overflow-y: auto;
       padding: 2rem 1rem;
     }
     .modal-fons.obert { display: flex; align-items: flex-start; justify-content: center; }
+
     .modal {
-      background: var(--fosc2);
-      border-top: 3px solid var(--verd);
+      background: white;
+      border-top: 5px solid var(--rosa);
       width: 100%;
-      max-width: 680px;
+      max-width: 660px;
       padding: 2.5rem;
       position: relative;
-      animation: slideUp .3s ease;
+      animation: slideUp .25s ease;
     }
     @keyframes slideUp {
-      from { transform: translateY(24px); opacity: 0; }
+      from { transform: translateY(20px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
     }
+
     .modal-tancar {
       position: absolute;
-      top: 1rem;
-      right: 1.2rem;
-      background: none;
-      border: none;
-      color: var(--gris2);
-      font-size: 1.4rem;
+      top: 1rem; right: 1.2rem;
+      background: none; border: none;
+      font-size: 1.3rem;
+      color: var(--text2);
       cursor: pointer;
-      line-height: 1;
       transition: color .2s;
     }
-    .modal-tancar:hover { color: var(--blanc); }
-    .modal-eyebrow {
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--verd3);
-      margin-bottom: .6rem;
-    }
+    .modal-tancar:hover { color: var(--fosc); }
+
+    .modal-badge { margin-bottom: 1rem; }
     .modal h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
       letter-spacing: .05em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--fosc);
+      line-height: 1.1;
+      margin-bottom: .4rem;
+    }
+    .modal-data {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .82rem;
+      letter-spacing: .1em;
+      color: var(--text2);
       margin-bottom: 1.8rem;
     }
     .modal-linea {
-      height: 2px;
-      background: linear-gradient(90deg, var(--verd) 0%, transparent 100%);
-      margin-bottom: 1.8rem;
+      height: 3px;
+      background: var(--rosa);
+      width: 48px;
+      margin-bottom: 2rem;
     }
     .modal-text {
-      font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: 1.05rem;
       line-height: 2;
-      color: var(--blanc);
+      color: var(--fosc);
       white-space: pre-wrap;
       margin-bottom: 2rem;
     }
     .modal-audio-titol {
-      font-size: .7rem;
+      font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      letter-spacing: .15em;
+      font-size: .78rem;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--verd3);
+      color: var(--rosa);
       margin-bottom: .6rem;
+      margin-top: 1.5rem;
     }
     audio {
       width: 100%;
       height: 36px;
-      accent-color: var(--verd2);
-      border-radius: 4px;
+      accent-color: var(--rosa);
     }
     .audio-pendent {
-      font-size: .85rem;
+      font-size: .88rem;
       font-style: italic;
-      color: var(--gris2);
+      color: var(--text2);
     }
     .modal-peu {
       margin-top: 2rem;
       padding-top: 1.2rem;
-      border-top: 1px solid rgba(255,255,255,.1);
+      border-top: 2px solid var(--gris);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -398,63 +374,49 @@
       gap: .5rem;
     }
     .modal-autor {
-      font-size: .8rem;
-      font-weight: 600;
-      color: var(--blanc);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--fosc);
     }
-    .modal-autor span {
-      display: block;
-      font-weight: 400;
-      color: var(--gris2);
-      font-size: .72rem;
-    }
-
-    /* ── BUIT ── */
-    .buit {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 4rem 1rem;
-      color: var(--gris2);
+    .modal-font {
+      font-size: .75rem;
+      color: var(--text2);
       font-style: italic;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Lora', serif;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: #060e09;
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding: 1.8rem 5vw;
+      background: var(--fosc);
+      color: rgba(255,255,255,.5);
+      padding: 1.4rem 2rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
     }
-    footer .logo-img { font-size: .85rem; }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
+    footer .logo { font-size: 1.6rem; color: white; }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a {
-      font-size: .72rem;
-      font-weight: 600;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: .75rem;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: var(--gris2);
+      color: rgba(255,255,255,.5);
       text-decoration: none;
       transition: color .2s;
     }
-    .footer-links a:hover { color: var(--verd3); }
-    .copyright {
-      font-size: .7rem;
-      color: var(--gris2);
-      width: 100%;
-    }
+    .footer-links a:hover { color: white; }
 
-    @media (max-width: 500px) {
-      header { flex-direction: column; gap: .8rem; }
-      .hero { height: auto; padding: 4rem 5vw 3rem; }
+    @media (max-width: 540px) {
+      header { padding: .8rem 1.2rem; }
+      .hero  { padding: 2.5rem 1.2rem 2.5rem; }
+      .bio, .seccio-poemes { padding-left: 1.2rem; padding-right: 1.2rem; }
       .modal { padding: 1.5rem 1.2rem; }
     }
   </style>
@@ -462,35 +424,32 @@
 <body>
 
 <header>
-  <a class="logo-img" href="https://gobo26.github.io/gobo26/">Gobo<span>26</span></a>
+  <a class="logo" href="https://gobo26.github.io/gobo26/">Gobo26</a>
   <nav class="tabs">
-    <a href="https://gobo26.github.io/gobo26/" >Col·lecció</a>
+    <a href="https://gobo26.github.io/gobo26/">Col·lecció</a>
     <a href="#" class="actiu">Taller de Lletres</a>
   </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-contingut">
-    <div class="hero-eyebrow">Gobo26 · Col·lecció literària</div>
-    <h1>Taller<br>de Lletres</h1>
+  <div class="hero-inner">
+    <div class="hero-tag">Gobo26 · Creació literària</div>
+    <h1>Taller de Lletres</h1>
     <p class="hero-sub">Poemes que es fan cançons</p>
   </div>
 </section>
 
-<div class="bio" id="bio">
+<div class="bio">
   <p id="bio-text">Escriptor i compositor. Aquí aplego els poemes que neixen en silenci i les cançons que en surten.</p>
 </div>
 
 <section class="seccio-poemes">
   <div class="seccio-cap">
-    <div class="seccio-titol-wrap">
-      <div class="seccio-titol">Els poemes</div>
-      <div class="linea"></div>
-    </div>
+    <div class="seccio-titol">Els poemes</div>
     <div class="filtres">
-      <button class="btn-filtre actiu" onclick="filtrar('tot', this)">Tots</button>
-      <button class="btn-filtre" onclick="filtrar('poema', this)">Poemes</button>
-      <button class="btn-filtre" onclick="filtrar('canco', this)">Cançons</button>
+      <button class="btn-filtre actiu" onclick="filtrar('tot',this)">Tots</button>
+      <button class="btn-filtre" onclick="filtrar('poema',this)">Poemes</button>
+      <button class="btn-filtre" onclick="filtrar('canco',this)">Cançons</button>
     </div>
   </div>
   <div class="grid-poemes" id="grid"></div>
@@ -499,38 +458,38 @@
 <!-- MODAL -->
 <div class="modal-fons" id="modal-fons" onclick="tancarModal(event)">
   <div class="modal" id="modal-cos">
-    <button class="modal-tancar" onclick="tancarModal(null, true)">✕</button>
-    <div class="modal-eyebrow" id="m-eyebrow"></div>
+    <button class="modal-tancar" onclick="tancarModal(null,true)">✕</button>
+    <div class="modal-badge" id="m-badge"></div>
     <h2 id="m-titol"></h2>
+    <div class="modal-data" id="m-data"></div>
     <div class="modal-linea"></div>
     <div class="modal-text" id="m-text"></div>
-    <div id="m-audio-bloc"></div>
+    <div id="m-audio"></div>
     <div class="modal-peu">
-      <div class="modal-autor">
-        <span id="m-autor"></span>
-        <span id="m-font">tallerdelletres · Gobo26</span>
+      <div>
+        <div class="modal-autor">Gobo26</div>
+        <div class="modal-font">tallerdelletres · gobo26.github.io</div>
       </div>
-      <div id="m-badge"></div>
+      <div id="m-badge2"></div>
     </div>
   </div>
 </div>
 
 <footer>
-  <a class="logo-img" href="https://gobo26.github.io/gobo26/">Gobo<span>26</span></a>
+  <a class="logo" href="https://gobo26.github.io/gobo26/">Gobo26</a>
   <div class="footer-links">
     <a href="https://github.com/Gobo26/Taller_de_lletres" target="_blank">GitHub</a>
     <a href="https://gobo26.github.io/gobo26/">Gobo26</a>
   </div>
-  <div class="copyright">© Taller de Lletres · Gobo26 2025</div>
 </footer>
 
 <script>
-// ════════════════════════════════════════════════════
-//  DADES  — afegeix aquí els teus poemes
-//  audio: "nom_fitxer.mp3"  o  null
-//  extracte: frase curta per mostrar a la targeta
-//  tipus: "poema" | "canco" | "ambdos"
-// ════════════════════════════════════════════════════
+// ════════════════════════════════════════════════
+//  DADES
+//  Per afegir un poema nou: copia un bloc {},
+//  omple titol, data (YYYY-MM-DD), tipus, extracte,
+//  text i audio (nom fitxer mp3 o null)
+// ════════════════════════════════════════════════
 const POEMES = [
   {
     id: 1,
@@ -604,9 +563,9 @@ entre els estris de la mar.`,
   }
 ];
 
-// ════════════════════════════════════════════════════
-//  LÒGICA
-// ════════════════════════════════════════════════════
+// ════════════════════════════════════════════════
+const COLORS = ['color-0','color-1','color-2','color-3'];
+
 let filtrActual = 'tot';
 
 function filtrar(f, btn) {
@@ -617,7 +576,7 @@ function filtrar(f, btn) {
 }
 
 function formatData(iso) {
-  const [y, m, d] = iso.split('-');
+  const [y,m,d] = iso.split('-');
   const mesos = ['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
   return `${parseInt(d)} ${mesos[parseInt(m)-1]} ${y}`;
 }
@@ -628,39 +587,36 @@ function badgeHTML(tipus) {
     canco:  ['badge-canco',  'Cançó'],
     ambdos: ['badge-ambdos', 'Poema · Cançó'],
   };
-  const [cls, txt] = map[tipus] || map.poema;
+  const [cls,txt] = map[tipus]||map.poema;
   return `<span class="badge ${cls}">${txt}</span>`;
 }
 
 function renderitzar() {
   const grid = document.getElementById('grid');
   let data = [...POEMES];
-  if (filtrActual === 'poema') data = data.filter(p => p.tipus === 'poema');
-  if (filtrActual === 'canco') data = data.filter(p => p.tipus === 'canco' || p.tipus === 'ambdos');
-  data.sort((a, b) => b.data.localeCompare(a.data));
+  if (filtrActual==='poema') data = data.filter(p=>p.tipus==='poema');
+  if (filtrActual==='canco') data = data.filter(p=>p.tipus==='canco'||p.tipus==='ambdos');
+  data.sort((a,b)=>b.data.localeCompare(a.data));
 
   if (!data.length) {
-    grid.innerHTML = '<div class="buit">Cap poema trobat.</div>';
+    grid.innerHTML='<div class="buit">Cap poema trobat.</div>';
     return;
   }
 
-  grid.innerHTML = data.map(p => `
-    <article class="targeta" onclick="obrirModal(${p.id})">
+  grid.innerHTML = data.map((p,i) => `
+    <article class="targeta ${COLORS[i%4]}" onclick="obrirModal(${p.id})">
       <div class="cometa">"</div>
       <div class="targeta-cos">
         <p class="extracte">${p.extracte}</p>
       </div>
       <div class="targeta-peu">
-        <div class="linea-peu"></div>
-        <div class="peu-info">
-          <div class="peu-autor">
-            ${p.titol}
-            <span>${formatData(p.data)}</span>
-          </div>
-          <div style="display:flex;gap:.4rem;align-items:center;">
-            ${badgeHTML(p.tipus)}
-            ${p.audio ? '<span style="font-size:.9rem;color:var(--verd3)">♪</span>' : ''}
-          </div>
+        <div>
+          <div class="peu-titol">${p.titol}</div>
+          <div class="peu-data">${formatData(p.data)}</div>
+        </div>
+        <div style="display:flex;gap:.4rem;align-items:center">
+          ${badgeHTML(p.tipus)}
+          ${p.audio?'<span style="font-size:1rem">♪</span>':''}
         </div>
       </div>
     </article>
@@ -668,41 +624,38 @@ function renderitzar() {
 }
 
 function obrirModal(id) {
-  const p = POEMES.find(x => x.id === id);
+  const p = POEMES.find(x=>x.id===id);
   if (!p) return;
+  document.getElementById('m-badge').innerHTML  = badgeHTML(p.tipus);
+  document.getElementById('m-titol').textContent = p.titol;
+  document.getElementById('m-data').textContent  = formatData(p.data);
+  document.getElementById('m-text').textContent  = p.text;
+  document.getElementById('m-badge2').innerHTML  = badgeHTML(p.tipus);
 
-  document.getElementById('m-eyebrow').textContent = formatData(p.data);
-  document.getElementById('m-titol').textContent   = p.titol.toUpperCase();
-  document.getElementById('m-text').textContent    = p.text;
-  document.getElementById('m-autor').textContent   = 'Gobo26';
-  document.getElementById('m-badge').innerHTML     = badgeHTML(p.tipus);
-
-  const audioBloc = document.getElementById('m-audio-bloc');
+  const audio = document.getElementById('m-audio');
   if (p.audio) {
-    audioBloc.innerHTML = `
-      <div class="modal-audio-titol">♪ Escolta la cançó</div>
+    audio.innerHTML=`<div class="modal-audio-titol">♪ Escolta la cançó</div>
       <audio controls preload="none" src="${p.audio}"></audio>`;
   } else if (p.notaAudio) {
-    audioBloc.innerHTML = `
-      <div class="modal-audio-titol">♪ Cançó</div>
+    audio.innerHTML=`<div class="modal-audio-titol">♪ Cançó</div>
       <p class="audio-pendent">${p.notaAudio}</p>`;
   } else {
-    audioBloc.innerHTML = '';
+    audio.innerHTML='';
   }
 
   document.getElementById('modal-fons').classList.add('obert');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function tancarModal(event, força = false) {
-  if (força || (event && event.target === document.getElementById('modal-fons'))) {
+function tancarModal(event, força=false) {
+  if (força||(event&&event.target===document.getElementById('modal-fons'))) {
     document.getElementById('modal-fons').classList.remove('obert');
-    document.body.style.overflow = '';
-    document.querySelectorAll('audio').forEach(a => a.pause());
+    document.body.style.overflow='';
+    document.querySelectorAll('audio').forEach(a=>a.pause());
   }
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') tancarModal(null, true); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') tancarModal(null,true); });
 
 renderitzar();
 </script>
