@@ -170,6 +170,13 @@
       background: var(--fosc);
       color: white;
     }
+    .filtre-sep {
+      display: inline-block;
+      width: 1px;
+      background: #ccc;
+      align-self: stretch;
+      margin: 0 .35rem;
+    }
 
     /* ── GRID ── */
     .grid-poemes {
@@ -449,6 +456,11 @@
       <button class="btn-filtre actiu" onclick="filtrar('tot',this)">Tots</button>
       <button class="btn-filtre" onclick="filtrar('poema',this)">Poemes</button>
       <button class="btn-filtre" onclick="filtrar('canco',this)">Cançons</button>
+      <span class="filtre-sep" aria-hidden="true"></span>
+      <button class="btn-filtre" onclick="filtrar('havanera',this)">Havaneres</button>
+      <button class="btn-filtre" onclick="filtrar('bolero',this)">Boleros</button>
+      <button class="btn-filtre" onclick="filtrar('rumba',this)">Rumbes</button>
+      <button class="btn-filtre" onclick="filtrar('valset',this)">Valsets</button>
     </div>
   </div>
   <div class="grid-poemes" id="grid"></div>
@@ -494,6 +506,7 @@ const POEMES = [
     titol: "La Tona i el Gat de Mar",
     data: "2026-05-26",
     tipus: "ambdos",
+    estil: "rumba",
     extracte: "La noia se'l mira, coqueta,\nsens parar de treballar.\nI ell fa veure que no mira,\nperò no se'n perd detall.",
     text:
 `En un poble de la costa,
@@ -556,7 +569,7 @@ entre els estris de la mar.`,
     credits: {
       lletra: "© 2024 Juan Martínez Díaz (JRLP)",
       llicencia: { text: "CC BY-NC-ND 4.0", url: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" },
-      musica: "Producció musical: Suno AI"
+      musica: "Producció musical: Suno AI · Estil: Rumba"
     }
   },
   {
@@ -564,6 +577,7 @@ entre els estris de la mar.`,
     titol: "El Vers Final",
     data: "2026-05-27",
     tipus: "ambdos",
+    estil: "bolero",
     extracte: "Si algun dia viure junts tingués sentit,\nsi algun dia el nostre amor pogués triomfar,\ndonaríem la raó a qui ens va dir\nque al final la vida escriu el vers final.",
     text:
 `Quan es nota com arriba la tardor
@@ -619,7 +633,22 @@ function formatData(iso) {
   return `${parseInt(d)} ${mesos[parseInt(m)-1]} ${y}`;
 }
 
-function badgeHTML(tipus) {
+const ESTILS = {
+  havanera: 'Havanera',
+  bolero:   'Bolero',
+  rumba:    'Rumba',
+  valset:   'Valset',
+};
+const ESTIL_FILTRES = Object.keys(ESTILS);
+
+function badgeHTML(tipus, estil) {
+  const estilNom = estil && ESTILS[estil];
+  if (estilNom && tipus === 'ambdos') {
+    return `<span class="badge badge-ambdos">Poema · ${estilNom}</span>`;
+  }
+  if (estilNom && tipus === 'canco') {
+    return `<span class="badge badge-canco">${estilNom}</span>`;
+  }
   const map = {
     poema:  ['badge-poema',  'Poema'],
     canco:  ['badge-canco',  'Cançó'],
@@ -633,7 +662,8 @@ function renderitzar() {
   const grid = document.getElementById('grid');
   let data = [...POEMES];
   if (filtrActual==='poema') data = data.filter(p=>p.tipus==='poema');
-  if (filtrActual==='canco') data = data.filter(p=>p.tipus==='canco'||p.tipus==='ambdos');
+  else if (filtrActual==='canco') data = data.filter(p=>p.tipus==='canco'||p.tipus==='ambdos');
+  else if (ESTIL_FILTRES.includes(filtrActual)) data = data.filter(p=>p.estil===filtrActual);
   data.sort((a,b)=>b.data.localeCompare(a.data));
 
   if (!data.length) {
@@ -653,7 +683,7 @@ function renderitzar() {
           <div class="peu-data">${formatData(p.data)}</div>
         </div>
         <div style="display:flex;gap:.4rem;align-items:center">
-          ${badgeHTML(p.tipus)}
+          ${badgeHTML(p.tipus, p.estil)}
           ${p.audio?'<span style="font-size:1rem">♪</span>':''}
         </div>
       </div>
@@ -664,11 +694,11 @@ function renderitzar() {
 function obrirModal(id) {
   const p = POEMES.find(x=>x.id===id);
   if (!p) return;
-  document.getElementById('m-badge').innerHTML  = badgeHTML(p.tipus);
+  document.getElementById('m-badge').innerHTML  = badgeHTML(p.tipus, p.estil);
   document.getElementById('m-titol').textContent = p.titol;
   document.getElementById('m-data').textContent  = formatData(p.data);
   document.getElementById('m-text').textContent  = p.text;
-  document.getElementById('m-badge2').innerHTML  = badgeHTML(p.tipus);
+  document.getElementById('m-badge2').innerHTML  = badgeHTML(p.tipus, p.estil);
 
   const audio = document.getElementById('m-audio');
   let html = '';
