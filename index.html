@@ -354,13 +354,42 @@
       color: var(--text2);
       margin-bottom: 2rem;
     }
-    .modal-credits {
-      margin-top: 1.2rem;
+    .modal-credits { margin-top: 1.5rem; }
+    .credits-obra {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: .72rem;
       letter-spacing: .08em;
       color: var(--text2);
       line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .credits-drets {
+      padding: 1rem 1.2rem;
+      background: var(--gris);
+      border-left: 3px solid var(--rosa);
+      font-family: 'Lora', serif;
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--text2);
+    }
+    .credits-drets-titol {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--fosc);
+      margin-bottom: .6rem;
+    }
+    .credits-drets p { margin-bottom: .6rem; }
+    .credits-drets p:last-child { margin-bottom: 0; }
+    .credits-drets strong { color: var(--fosc); font-weight: 600; }
+    .credits-reserva {
+      font-style: italic;
+      font-size: .76rem;
+      margin-top: .8rem !important;
+      padding-top: .6rem;
+      border-top: 1px solid rgba(0,0,0,.08);
     }
     .modal-credits a {
       color: var(--rosa);
@@ -742,11 +771,19 @@ function obrirModal(id) {
   const creditsEl = document.getElementById('m-credits');
   if (p.credits) {
     const c = p.credits;
-    const parts = [];
-    if (c.lletra) parts.push(`Lletra ${c.lletra}`);
-    if (c.llicencia) parts.push(`Llicència <a href="${c.llicencia.url}" target="_blank" rel="noopener">${c.llicencia.text}</a>`);
-    if (c.musica) parts.push(c.musica);
-    creditsEl.innerHTML = `<div class="modal-credits">${parts.join(' · ')}</div>`;
+    const obraParts = [];
+    if (c.lletra) obraParts.push(`Lletra ${c.lletra}`);
+    if (c.musica) obraParts.push(c.musica);
+    creditsEl.innerHTML = `
+      <div class="modal-credits">
+        <div class="credits-obra">${obraParts.join(' · ')}</div>
+        <div class="credits-drets">
+          <div class="credits-drets-titol">Ús i drets</div>
+          <p><strong>Ús personal i no comercial:</strong> llicència <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — pots compartir l'obra citant l'autor, sense modificar-la i sense ànim de lucre.</p>
+          <p><strong>Usos comercials</strong> (sincronització audiovisual, edició discogràfica, interpretació pública remunerada, streaming amb ànim de lucre, publicitat, etc.): cal llicència expressa de l'autor. Contacte: <a href="mailto:fustaventura@gmail.com">fustaventura@gmail.com</a>.</p>
+          <p class="credits-reserva">Tots els drets no concedits expressament queden reservats. L'ús comercial sense autorització dóna dret a la corresponent indemnització i compensació econòmica per part de l'autor.</p>
+        </div>
+      </div>`;
   } else {
     creditsEl.innerHTML = '';
   }
