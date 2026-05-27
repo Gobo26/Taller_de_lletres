@@ -356,12 +356,22 @@
     }
     .modal-credits { margin-top: 1.5rem; }
     .credits-obra {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .08em;
+      font-family: 'Lora', serif;
+      font-size: .82rem;
       color: var(--text2);
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 1.2rem;
+    }
+    .credits-obra .credits-linia { margin-bottom: .3rem; }
+    .credits-obra .credits-linia:last-child { margin-bottom: 0; }
+    .credits-etiqueta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--fosc);
+      margin-right: .35rem;
     }
     .credits-drets {
       padding: 1rem 1.2rem;
@@ -588,11 +598,7 @@ fent un somriure en passar.
 Sentint com brolla la vida
 entre els estris de la mar.`,
     audio: "la-tona-i-el-gat-de-mar.mp3",
-    credits: {
-      lletra: "© 2024 Juan Martínez Díaz (JRLP)",
-      llicencia: { text: "CC BY-NC-ND 4.0", url: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" },
-      musica: "Producció musical: Suno AI · Estil: Rumba"
-    }
+    credits: { any: 2024 }
   },
   {
     id: 2,
@@ -629,11 +635,7 @@ o la mort cruel un dia ens separés
 una lletra de cançó recordarà
 que la vida sempre escriu el vers final.`,
     audio: "el-vers-final.mp3",
-    credits: {
-      lletra: "© 2026 Juan Martínez Díaz (JRLP)",
-      llicencia: { text: "CC BY-NC-ND 4.0", url: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" },
-      musica: "Producció musical: Suno AI · Estil: Bolero"
-    }
+    credits: { any: 2026 }
   },
   {
     id: 3,
@@ -668,11 +670,7 @@ vaig descobrir el meu món
 tinc el salanc a les venes
 jo porto el mar dins del cor.`,
     audio: "agafa-fort-el-timo.mp3",
-    credits: {
-      lletra: "© 2026 Juan Martínez Díaz (JRLP)",
-      llicencia: { text: "CC BY-NC-ND 4.0", url: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" },
-      musica: "Producció musical: Suno AI · Estil: Havanera"
-    }
+    credits: { any: 2026 }
   }
 ];
 
@@ -770,13 +768,14 @@ function obrirModal(id) {
 
   const creditsEl = document.getElementById('m-credits');
   if (p.credits) {
-    const c = p.credits;
-    const obraParts = [];
-    if (c.lletra) obraParts.push(`Lletra ${c.lletra}`);
-    if (c.musica) obraParts.push(c.musica);
+    const any = p.credits.any;
+    const lletraLinia = `<div class="credits-linia"><span class="credits-etiqueta">Lletra:</span>© ${any} Juan Martínez Díaz (JRLP) — autor inscrit a SGAE</div>`;
+    const musicaLinia = p.audio
+      ? `<div class="credits-linia"><span class="credits-etiqueta">Música:</span>generada amb Suno AI sota direcció creativa de l'autor</div>`
+      : '';
     creditsEl.innerHTML = `
       <div class="modal-credits">
-        <div class="credits-obra">${obraParts.join(' · ')}</div>
+        <div class="credits-obra">${lletraLinia}${musicaLinia}</div>
         <div class="credits-drets">
           <div class="credits-drets-titol">Ús i drets</div>
           <p><strong>Ús personal i no comercial:</strong> llicència <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — pots compartir l'obra citant l'autor, sense modificar-la i sense ànim de lucre.</p>
