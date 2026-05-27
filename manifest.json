@@ -4,8 +4,8 @@
   "description": "Poemes i cançons de Gobo26",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#1c1410",
-  "theme_color": "#c8883a",
+  "background_color": "#faf8f5",
+  "theme_color": "#c4556a",
   "lang": "ca",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
