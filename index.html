@@ -365,6 +365,20 @@
       font-style: italic;
       color: var(--text2);
     }
+    .modal-credits {
+      margin-top: 1.2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+    .modal-credits a {
+      color: var(--rosa);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,85,106,.3);
+    }
+    .modal-credits a:hover { border-bottom-color: var(--rosa); }
     .modal-peu {
       margin-top: 2rem;
       padding-top: 1.2rem;
@@ -527,10 +541,6 @@ mirant-se els dos d'amagat
 buscant-se amb una mirada,
 fent un somriure en passar.
 
-
-· · ·
-
-
 Avui és la festa del Carme,
 la patrona de la mar,
 i tot el poble es prepara
@@ -560,8 +570,12 @@ fent un somriure en passar.
 
 Sentint com brolla la vida
 entre els estris de la mar.`,
-    audio: null,
-    notaAudio: "Cançó en preparació"
+    audio: "la-tona-i-el-gat-de-mar.mp3",
+    credits: {
+      lletra: "© 2024 Juan Martínez Díaz (JRLP)",
+      llicencia: { text: "CC BY-NC-ND 4.0", url: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca" },
+      musica: "Producció musical: Suno AI"
+    }
   }
 ];
 
@@ -635,15 +649,23 @@ function obrirModal(id) {
   document.getElementById('m-badge2').innerHTML  = badgeHTML(p.tipus);
 
   const audio = document.getElementById('m-audio');
+  let html = '';
   if (p.audio) {
-    audio.innerHTML=`<div class="modal-audio-titol">♪ Escolta la cançó</div>
+    html += `<div class="modal-audio-titol">♪ Escolta la cançó</div>
       <audio controls preload="none" src="${p.audio}"></audio>`;
   } else if (p.notaAudio) {
-    audio.innerHTML=`<div class="modal-audio-titol">♪ Cançó</div>
+    html += `<div class="modal-audio-titol">♪ Cançó</div>
       <p class="audio-pendent">${p.notaAudio}</p>`;
-  } else {
-    audio.innerHTML='';
   }
+  if (p.credits) {
+    const c = p.credits;
+    const parts = [];
+    if (c.lletra) parts.push(`Lletra ${c.lletra}`);
+    if (c.llicencia) parts.push(`Llicència <a href="${c.llicencia.url}" target="_blank" rel="noopener">${c.llicencia.text}</a>`);
+    if (c.musica) parts.push(c.musica);
+    html += `<div class="modal-credits">${parts.join(' · ')}</div>`;
+  }
+  audio.innerHTML = html;
 
   document.getElementById('modal-fons').classList.add('obert');
   document.body.style.overflow='hidden';
