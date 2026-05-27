@@ -346,11 +346,13 @@
       width: 100%;
       height: 36px;
       accent-color: var(--rosa);
+      margin-bottom: 2rem;
     }
     .audio-pendent {
       font-size: .88rem;
       font-style: italic;
       color: var(--text2);
+      margin-bottom: 2rem;
     }
     .modal-credits {
       margin-top: 1.2rem;
@@ -463,9 +465,10 @@
     <div class="modal-badge" id="m-badge"></div>
     <h2 id="m-titol"></h2>
     <div class="modal-data" id="m-data"></div>
+    <div id="m-audio"></div>
     <div class="modal-linea"></div>
     <div class="modal-text" id="m-text"></div>
-    <div id="m-audio"></div>
+    <div id="m-credits"></div>
     <div class="modal-peu">
       <div>
         <div class="modal-autor">Gobo26</div>
@@ -657,9 +660,7 @@ function filtrar(f, btn) {
 }
 
 function formatData(iso) {
-  const [y,m,d] = iso.split('-');
-  const mesos = ['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
-  return `${parseInt(d)} ${mesos[parseInt(m)-1]} ${y}`;
+  return iso.split('-')[0];
 }
 
 const ESTILS = {
@@ -728,23 +729,27 @@ function obrirModal(id) {
   document.getElementById('m-badge2').innerHTML  = badgeHTML(p.tipus, p.estil);
 
   const audio = document.getElementById('m-audio');
-  let html = '';
   if (p.audio) {
-    html += `<div class="modal-audio-titol">♪ Escolta la cançó</div>
+    audio.innerHTML = `<div class="modal-audio-titol">♪ Escolta la cançó</div>
       <audio controls preload="none" src="${p.audio}"></audio>`;
   } else if (p.notaAudio) {
-    html += `<div class="modal-audio-titol">♪ Cançó</div>
+    audio.innerHTML = `<div class="modal-audio-titol">♪ Cançó</div>
       <p class="audio-pendent">${p.notaAudio}</p>`;
+  } else {
+    audio.innerHTML = '';
   }
+
+  const creditsEl = document.getElementById('m-credits');
   if (p.credits) {
     const c = p.credits;
     const parts = [];
     if (c.lletra) parts.push(`Lletra ${c.lletra}`);
     if (c.llicencia) parts.push(`Llicència <a href="${c.llicencia.url}" target="_blank" rel="noopener">${c.llicencia.text}</a>`);
     if (c.musica) parts.push(c.musica);
-    html += `<div class="modal-credits">${parts.join(' · ')}</div>`;
+    creditsEl.innerHTML = `<div class="modal-credits">${parts.join(' · ')}</div>`;
+  } else {
+    creditsEl.innerHTML = '';
   }
-  audio.innerHTML = html;
 
   document.getElementById('modal-fons').classList.add('obert');
   document.body.style.overflow='hidden';
