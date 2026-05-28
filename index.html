@@ -206,28 +206,31 @@
       padding: 3rem 2rem 2.7rem;
     }
     .intro-inner {
-      max-width: 820px;
+      max-width: min(1880px, calc(100vw - 4rem));
       position: relative;
-      padding-left: 2rem;
+      margin: 0 auto;
+      text-align: center;
     }
-    .intro-inner::before {
-      content: "✎";
-      position: absolute;
-      left: 0;
-      top: -.1rem;
+    #intro-titol::before {
+      content: "✎ ";
       font-family: 'Caveat', cursive;
       font-size: 2rem;
+      line-height: 0;
       color: rgba(127,63,68,.55);
     }
     .intro p {
-      font-size: 1.02rem;
-      line-height: 1.95;
+      font-size: 1.04rem;
+      line-height: 1.9;
       color: #5d5146;
+      text-wrap: balance;
     }
     .intro p + p { margin-top: .85rem; }
     .nota-drets {
-      font-size: .82rem !important;
+      font-size: .9rem !important;
       color: var(--text2);
+    }
+    @media (min-width: 1720px) {
+      .intro p { white-space: nowrap; }
     }
 
     /* ── SECCIÓ POEMES ── */
@@ -718,7 +721,6 @@
       header { padding: .8rem 1.2rem; }
       .hero  { padding: 2.5rem 1.2rem 2.5rem; }
       .intro, .seccio-poemes, .contacte { padding-left: 1.2rem; padding-right: 1.2rem; }
-      .intro-inner { padding-left: 1.55rem; }
       .seccio-titol::after,
       .contacte h2::after {
         display: block;
@@ -738,7 +740,6 @@
   <a class="logo" href="https://gobo26.github.io/gobo26/">Gobo26</a>
   <nav class="tabs">
     <a href="https://gobo26.github.io/gobo26/">Col·lecció</a>
-    <a href="#" class="actiu">Taller de Lletres</a>
   </nav>
 </header>
 
@@ -753,7 +754,7 @@
 <section class="intro" aria-labelledby="intro-titol">
   <div class="intro-inner">
     <p id="intro-titol">Un espai de lletres originals, escrites a mà i portades a cançó amb eines digitals. Cada peça es pot llegir i escoltar aquí, com qui obre una llibreta i hi troba una veu pròpia.</p>
-    <p class="nota-drets">Les lletres són originals de l'autor. La música ha estat generada amb Suno AI sota direcció creativa pròpia. Les obres es mostren per a lectura i escolta personal.</p>
+    <p class="nota-drets">Les lletres són originals de l'autor. La música ha estat generada amb eines d'IA sota direcció creativa pròpia. Les obres es mostren per a lectura i escolta personal.</p>
   </div>
 </section>
 
@@ -1187,7 +1188,7 @@ function obrirModal(id) {
     const any = p.credits.any;
     const lletraLinia = `<div class="credits-linia"><span class="credits-etiqueta">Lletra:</span>© ${any} Juan Martínez Díaz (JRLP) — autor inscrit a SGAE</div>`;
     const musicaLinia = p.audio
-      ? `<div class="credits-linia"><span class="credits-etiqueta">Música:</span>generada amb Suno AI sota direcció creativa de l'autor</div>`
+      ? `<div class="credits-linia"><span class="credits-etiqueta">Música:</span>generada amb eines d'IA sota direcció creativa de l'autor</div>`
       : '';
     creditsEl.innerHTML = `
       <div class="modal-credits">
