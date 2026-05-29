@@ -294,6 +294,13 @@
       background: var(--vi);
       color: #fff6e6;
     }
+    .btn-filtre:focus-visible,
+    .targeta:focus-visible,
+    .modal-tancar:focus-visible,
+    .contacte-boto:focus-visible {
+      outline: 3px solid rgba(74,122,138,.32);
+      outline-offset: 3px;
+    }
 
     /* ── GRID ── */
     .grid-poemes {
@@ -331,6 +338,11 @@
       transform: translateY(-3px);
       box-shadow: 0 20px 42px rgba(70,45,25,.13);
       border-color: rgba(127,63,68,.34);
+    }
+    .targeta:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 42px rgba(70,45,25,.13);
+      border-color: rgba(127,63,68,.5);
     }
 
     .targeta.color-0 { background: rgba(248,232,219,.82); }
@@ -774,11 +786,11 @@
   <div class="seccio-cap">
     <div class="seccio-titol">Els poemes</div>
     <div class="filtres">
-      <button class="btn-filtre actiu" onclick="filtrar('tot',this)">Tots</button>
-      <button class="btn-filtre" onclick="filtrar('havanera',this)">Havaneres</button>
-      <button class="btn-filtre" onclick="filtrar('bolero',this)">Boleros</button>
-      <button class="btn-filtre" onclick="filtrar('rumba',this)">Rumbes</button>
-      <button class="btn-filtre" onclick="filtrar('valset',this)">Valsets</button>
+      <button type="button" class="btn-filtre actiu" aria-pressed="true" onclick="filtrar('tot',this)">Tots</button>
+      <button type="button" class="btn-filtre" aria-pressed="false" onclick="filtrar('havanera',this)">Havaneres</button>
+      <button type="button" class="btn-filtre" aria-pressed="false" onclick="filtrar('bolero',this)">Boleros</button>
+      <button type="button" class="btn-filtre" aria-pressed="false" onclick="filtrar('rumba',this)">Rumbes</button>
+      <button type="button" class="btn-filtre" aria-pressed="false" onclick="filtrar('valset',this)">Valsets</button>
     </div>
   </div>
   <div class="grid-poemes" id="grid"></div>
@@ -786,8 +798,8 @@
 
 <!-- MODAL -->
 <div class="modal-fons" id="modal-fons" onclick="tancarModal(event)">
-  <div class="modal" id="modal-cos">
-    <button class="modal-tancar" onclick="tancarModal(null,true)">✕</button>
+  <div class="modal" id="modal-cos" role="dialog" aria-modal="true" aria-labelledby="m-titol">
+    <button type="button" class="modal-tancar" onclick="tancarModal(null,true)" aria-label="Tancar la fitxa">✕</button>
     <div class="modal-badge" id="m-badge"></div>
     <h2 id="m-titol"></h2>
     <div class="modal-data" id="m-data"></div>
@@ -1088,11 +1100,18 @@ i d'un conte un final inesperat.`,
 const COLORS = ['color-0','color-1','color-2','color-3'];
 
 let filtrActual = 'tot';
+let elementAmbFocus = null;
 
 function filtrar(f, btn) {
   filtrActual = f;
-  document.querySelectorAll('.btn-filtre').forEach(b => b.classList.remove('actiu'));
-  if (btn) btn.classList.add('actiu');
+  document.querySelectorAll('.btn-filtre').forEach(b => {
+    b.classList.remove('actiu');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  if (btn) {
+    btn.classList.add('actiu');
+    btn.setAttribute('aria-pressed', 'true');
+  }
   renderitzar();
 }
 
@@ -1142,6 +1161,23 @@ function fitxaHTML(fitxa) {
   `).join('')}</div>`;
 }
 
+function escapeAttr(text) {
+  return String(text).replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
+
+function activarTargeta(event, id) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    obrirModal(id);
+  }
+}
+
 function renderitzar() {
   const grid = document.getElementById('grid');
   let data = [...POEMES];
@@ -1154,7 +1190,7 @@ function renderitzar() {
   }
 
   grid.innerHTML = data.map((p,i) => `
-    <article class="targeta ${COLORS[i%4]}" onclick="obrirModal(${p.id})">
+    <article class="targeta ${COLORS[i%4]}" role="button" tabindex="0" aria-label="Obrir ${escapeAttr(p.titol)}" onclick="obrirModal(${p.id})" onkeydown="activarTargeta(event,${p.id})">
       <div class="cometa">"</div>
       <div class="targeta-cos">
         <p class="extracte">${p.extracte}</p>
@@ -1177,6 +1213,7 @@ function renderitzar() {
 function obrirModal(id) {
   const p = POEMES.find(x=>x.id===id);
   if (!p) return;
+  elementAmbFocus = document.activeElement;
   document.getElementById('m-badge').innerHTML  = badgeHTML(p.tipus, p.estil);
   document.getElementById('m-titol').textContent = p.titol;
   document.getElementById('m-data').textContent  = formatData(p.data);
@@ -1218,6 +1255,7 @@ function obrirModal(id) {
 
   document.getElementById('modal-fons').classList.add('obert');
   document.body.style.overflow='hidden';
+  document.querySelector('.modal-tancar').focus();
 }
 
 function tancarModal(event, força=false) {
@@ -1225,6 +1263,8 @@ function tancarModal(event, força=false) {
     document.getElementById('modal-fons').classList.remove('obert');
     document.body.style.overflow='';
     document.querySelectorAll('audio').forEach(a=>a.pause());
+    if (elementAmbFocus && typeof elementAmbFocus.focus === 'function') elementAmbFocus.focus();
+    elementAmbFocus = null;
   }
 }
 
