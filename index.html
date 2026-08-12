@@ -296,8 +296,7 @@
     }
     .btn-filtre:focus-visible,
     .targeta:focus-visible,
-    .modal-tancar:focus-visible,
-    .contacte-boto:focus-visible {
+    .modal-tancar:focus-visible {
       outline: 3px solid rgba(74,122,138,.32);
       outline-offset: 3px;
     }
@@ -609,80 +608,6 @@
     }
     .modal-credits a:hover { border-bottom-color: var(--vi); }
 
-    /* ── CONTACTE ── */
-    .contacte {
-      background:
-        linear-gradient(rgba(49,95,102,.1), rgba(127,63,68,.08)),
-        url("assets/paper-mariner.jpg") center / 900px auto;
-      padding: 4.2rem 2rem;
-      border-top: 1px solid rgba(122,86,45,.18);
-    }
-    .contacte-inner {
-      max-width: 820px;
-      position: relative;
-      margin: 0 auto;
-      padding: 2.1rem 2.2rem;
-      background: rgba(255,250,240,.68);
-      border: 1px solid rgba(122,86,45,.2);
-      border-radius: 6px;
-      box-shadow: 0 16px 35px rgba(70,45,25,.07);
-      text-align: center;
-    }
-    .contacte-inner::after {
-      content: "✉";
-      position: absolute;
-      left: 50%;
-      top: .85rem;
-      transform: translateX(-50%);
-      font-family: 'Caveat', cursive;
-      font-size: 1.8rem;
-      color: rgba(49,95,102,.24);
-    }
-    .contacte h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--fosc);
-      margin-bottom: .8rem;
-      padding-top: .8rem;
-    }
-    .contacte h2::after {
-      content: " escrit a mida";
-      font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 0;
-      text-transform: none;
-      color: var(--vi);
-      margin-left: .4rem;
-    }
-    .contacte p {
-      font-size: .96rem;
-      line-height: 1.85;
-      color: var(--text2);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .contacte-boto {
-      display: inline-block;
-      margin-top: 1.2rem;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: .85rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      background: var(--vi);
-      color: #fff6e6;
-      text-decoration: none;
-      padding: .72rem 1.08rem;
-      border-radius: 2px;
-      transition: background .2s;
-    }
-    .contacte-boto:hover { background: var(--mar); }
-
     .modal-peu {
       margin-top: 2rem;
       padding-top: 1.2rem;
@@ -737,15 +662,13 @@
     @media (max-width: 540px) {
       header { padding: .8rem 1.2rem; }
       .hero  { padding: 2.5rem 1.2rem 2.5rem; }
-      .intro, .seccio-poemes, .contacte { padding-left: 1.2rem; padding-right: 1.2rem; }
-      .seccio-titol::after,
-      .contacte h2::after {
+      .intro, .seccio-poemes { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .seccio-titol::after {
         display: block;
         margin-left: 0;
         margin-top: .15rem;
       }
       .targeta { min-height: 330px; }
-      .contacte-inner { padding: 1.6rem 1.35rem; }
       .fitxa-obra { grid-template-columns: 1fr; }
       .modal { padding: 1.5rem 1.2rem; }
     }
@@ -804,20 +727,10 @@
   </div>
 </div>
 
-<section class="contacte" id="contacte">
-  <div class="contacte-inner">
-    <h2>Encàrrecs i dedicatòries</h2>
-    <p>Escric poemes, lletres personalitzades i textos per a moments especials: aniversaris, homenatges, celebracions familiars, records compartits o cançons amb nom propi.</p>
-    <p>Si tens una història, una persona o una emoció que vols convertir en paraules, pots escriure'm i en parlem amb calma.</p>
-    <a class="contacte-boto" href="mailto:fustaventura@gmail.com?subject=Enc%C3%A0rrec%20de%20poema%20o%20lletra">Escriure per un encàrrec</a>
-  </div>
-</section>
-
 <footer>
   <a class="logo" href="https://gobo26.github.io/gobo26/">Gobo26</a>
   <p class="footer-nota">© Juan Martínez Díaz (JRLP). Lletres originals. Lectura i escolta personal. Tots els drets reservats.</p>
   <div class="footer-links">
-    <a href="#contacte">Contacte</a>
     <a href="https://gobo26.github.io/gobo26/">Aplicacions</a>
     <a href="https://gobo26.github.io/fustaventura/">Fustaventura</a>
   </div>
@@ -1233,7 +1146,7 @@ function obrirModal(id) {
           <div class="credits-drets-titol">Ús i drets</div>
           <p>Aquesta obra es mostra aquí només per a lectura i escolta personal.</p>
           <p>Qualsevol enregistrament, publicació, ús comercial, transformació, interpretació pública o incorporació en altres projectes requereix autorització prèvia de l'autor.</p>
-          <p class="credits-reserva">Tots els drets reservats. Per a permisos o encàrrecs: <a href="mailto:fustaventura@gmail.com">fustaventura@gmail.com</a>.</p>
+          <p class="credits-reserva">Tots els drets reservats.</p>
         </div>
       </div>`;
   } else {
